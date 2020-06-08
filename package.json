@@ -4,7 +4,7 @@
     "description": "> It is a Todo list app build using JavaScript.",
     "private": true,
     "scripts": {
-        "start": "webpack"
+        "start": "webpack --watch"
     },
     "repository": {
         "type": "git",

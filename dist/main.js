@@ -129,7 +129,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\n// DOM manipulation\r\nlet addNewList = document.getElementById(\"addNewList\");\r\nlet addNewTodo = document.getElementById(\"addNewTodo\");\r\nlet btns = [addNewList, addNewTodo];\r\n\r\naddNewList.addEventListener('click', e => {\r\n    // document.querySelector('new-list')[0].style.visibility = 'visible';\r\n    document.getElementsByClassName('new-list')[0].style.display = \"block\";\r\n})\r\n\r\naddNewTodo.addEventListener('click', e => {\r\n    document.getElementsByClassName('new-todo')[0].style.display = 'block';\r\n})\r\n\r\n// function displayForm(e) {\r\n//   console.log(e.target.className);\r\n// }\r\n// addNewTodo.addEventListener('click', displayForm);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
