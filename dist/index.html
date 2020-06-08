@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="title">
+
+        <h1>Todo List App</h1>
+
+    </div>
+    <div class="grid-container">
+
+        <div class="left-side items">
+            <!-- your lists -->
+            <h2>Your Lists</h2>
+            <div class="list-info">
+                <a href="#" id="listName">My Travel list</a>
+                <div id="listCount" class="list-count">4</div>
+            </div>
+            <div class="newBtn">
+                <button class="#" id="addNewList">Add a new list</button>
+            </div>
+        </div>
+        <!-- Show the content -->
+        <div class="middle-side items">
+            <div class="listName">My Travel list</div>
+            <!-- checkbox, todo's title,due date prioprity and button that shows and hides the description edit and delete todo -->
+            <div class="todo-display">
+                <div>
+                    <input type="checkbox" name="completed" id="">
+                    <span class="todoTitle">My stops plan</span>
+                    <!-- <div> -->
+                    <button class="btn btn-info">More...</button>
+                    <!-- </div> -->
+                </div>
+                <div class="more-info">
+                    <div class="info-title">My stops plan</div>
+                    <div class="description">Where I will go</div>
+                    <div>
+                        <button class="btn btn-warning">Edit</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="newTodoBtn">
+                <button class="#" id="addNewTodo">Add a new todo</button>
+            </div>
+            <div class="new-todo">
+                <form action="#">
+                    <label for="title">Title</label>
+                    <div>
+                        <input type="text" name="title" id="title" required>
+                    </div>
+
+                    <label for="description">Description</label>
+                    <div>
+                        <input type="text" name="description" id="description">
+                    </div>
+                    <label for="dateDue">Date Due</label>
+                    <div>
+                        <input type="date" name="dateDue" id="dateDue">
+                    </div>
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <div class="cta-btns">
+                        <button class="save-btn">Save</button>
+                        <button class="cancel-btn">Cancel</button>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="new-list">
+                <form action="#">
+                    <label for="new-list-title">Title</label>
+                    <div>
+                        <input type="text" name="new-list-title" id="new-list-title" required>
+                    </div>
+
+                    <label for="list-description">Description</label>
+                    <div>
+                        <input type="text" name="list-description" id="list-description">
+                        <div class="cta-btns">
+                            <button class="save-btn">Save</button>
+                            <button class="cancel-btn">Cancel</button>
+
+                        </div>
+                </form>
+                </div>
+            </div>
+            <!-- conpleted list -->
+        </div>
+        <script src="./main.js"></script>
+</body>
+
+</html>
