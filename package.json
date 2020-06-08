@@ -1,0 +1,24 @@
+{
+    "name": "todolist",
+    "version": "1.0.0",
+    "description": "> It is a Todo list app build using JavaScript.",
+    "private": true,
+    "scripts": {
+        "start": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MarvellousUbani/todolist.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/MarvellousUbani/todolist/issues"
+    },
+    "homepage": "https://github.com/MarvellousUbani/todolist#readme",
+    "devDependencies": {
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11"
+    }
+}
