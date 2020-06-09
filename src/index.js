@@ -59,16 +59,56 @@ const addTodo = (projectId, title, description, dueDate, priority) => {
 }
 
 const displayTodos = (projectId) => {
-    for (let todo in groups[projectId].todos) {
-        const todos = groups[projectId].todos
-            // todos[todo]
-
-        // Add todo stuff to the Dom
-        console.log(todos[todo]);
+    const todos = groups[projectId].todos;
+    const todoBox = document.getElementById("todo-box");
+    for (let todo in todos) {
+      const { title, description, priority, dueDate } = todos[todo];
+  
+      const todoDisplay = document.createElement("div");
+      todoDisplay.classList.add("todo-display");
+  
+      const inputHolder = document.createElement("div");
+      const checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      const todoTitle = document.createElement("span");
+      todoTitle.classList.add("todoTitle");
+      const moreButton = document.createElement("button");
+      moreButton.textContent = "More...";
+  
+      inputHolder.appendChild(checkbox);
+      inputHolder.appendChild(todoTitle);
+      inputHolder.appendChild(moreButton);
+  
+      const moreInfo = document.createElement("div");
+      const infoTitle = document.createElement("p");
+      infoTitle.textContent = `${title}`;
+      const infoDescription = document.createElement("p");
+      infoDescription.textContent = `${description}`;
+      const duedate = document.createElement("p");
+      duedate.textContent = `${dueDate}`;
+      const priorityLevel = document.createElement("p");
+      priorityLevel.textContent = `${priority}`;
+  
+      const editButton = document.createElement("button");
+      editButton.textContent = "Edit";
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+  
+      moreInfo.appendChild(infoTitle);
+      moreInfo.appendChild(infoDescription);
+      moreInfo.appendChild(duedate);
+      moreInfo.appendChild(priorityLevel);
+      moreInfo.appendChild(editButton);
+      moreInfo.appendChild(deleteButton);
+  
+      todoDisplay.appendChild(inputHolder);
+      todoDisplay.appendChild(moreInfo);
+  
+      todoBox.appendChild(todoDisplay);
     }
-    // console.log(let todo of groups[projectId].todos)
-    // Add todo stuff to the Dom
-}
+  };
+  
+  displayTodos(1);
 
 const displayGroups = () => {
     for (let group in groups) {
