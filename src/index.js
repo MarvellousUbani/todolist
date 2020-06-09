@@ -9,17 +9,29 @@ let linkList = document.getElementById("link-list");
 let btns = [addNewList, addNewTodo];
 let currentGroupId = "";
 const saveBtn = document.querySelector(".save-btn");
-const cancelBtn = document.querySelector(".cancel-btn");
+const cancelBtn = document.querySelectorAll(".cancel-btn");
 const todoForm = document.getElementById("todo-form");
-const newToDo =   document.getElementsByClassName('new-todo')[0];
+const newToDo = document.getElementsByClassName('new-todo')[0];
 
 addNewList.addEventListener('click', e => {
     document.getElementsByClassName('new-list')[0].style.display = "block";
 })
 
 addNewTodo.addEventListener('click', e => {
-  newToDo.style.display = 'block';
+    newToDo.style.display = 'block';
 })
+
+// cancelBtn.addEventListener('click', (e) => {
+//     document.getElementsByClassName('new-list')[0].style.display = "none";
+//     newToDo.style.display = 'none';
+//     // console.log(e.target.class)
+// });
+for (let btn of cancelBtn) {
+    btn.addEventListener('click', () => {
+        document.getElementsByClassName('new-list')[0].style.display = "none";
+        newToDo.style.display = 'none';
+    })
+}
 
 
 // Creating Groups and Group Logic
@@ -56,31 +68,38 @@ const addTodo = (projectId) => {
     localStorage.setItem("groups", JSON.stringify(groups));
 }
 
+const todoBox = document.getElementById("todo-box");
 const displayTodos = (projectId) => {
-    const todoBox = document.getElementById("todo-box");
+    todoBox.innerHTML = "";
     groups = JSON.parse(localStorage.getItem("groups")) || {};
     const todos = groups[projectId].todos;
-    if(Object.values(todos).length > 0 ){
+    if (Object.values(todos).length > 0) {
         for (let todo in todos) {
             const { title, description, priority, dueDate } = todos[todo];
-    
+
             const todoDisplay = document.createElement("div");
             todoDisplay.classList.add("todo-display");
-    
+
             const inputHolder = document.createElement("div");
+            inputHolder.classList.add("test");
             const checkbox = document.createElement("input");
             checkbox.setAttribute("type", "checkbox");
             const todoTitle = document.createElement("span");
             todoTitle.classList.add("todoTitle");
             const moreButton = document.createElement("button");
+            moreButton.classList.add("more-btn");
+            const infoTitle = document.createElement("p");
+            todoTitle.textContent = `${title}`;
+            inputHolder.appendChild(infoTitle);
             moreButton.textContent = "More...";
-    
+
             inputHolder.appendChild(checkbox);
             inputHolder.appendChild(todoTitle);
             inputHolder.appendChild(moreButton);
-    
+
             const moreInfo = document.createElement("div");
-            const infoTitle = document.createElement("p");
+            moreInfo.classList.add("more-info");
+
             infoTitle.textContent = `${title}`;
             const infoDescription = document.createElement("p");
             infoDescription.textContent = `${description}`;
@@ -88,28 +107,36 @@ const displayTodos = (projectId) => {
             duedate.textContent = `${dueDate}`;
             const priorityLevel = document.createElement("p");
             priorityLevel.textContent = `${priority}`;
-    
+
             const editButton = document.createElement("button");
             editButton.textContent = "Edit";
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
-    
+
             moreInfo.appendChild(infoTitle);
             moreInfo.appendChild(infoDescription);
             moreInfo.appendChild(duedate);
             moreInfo.appendChild(priorityLevel);
             moreInfo.appendChild(editButton);
             moreInfo.appendChild(deleteButton);
-    
+
             todoDisplay.appendChild(inputHolder);
             todoDisplay.appendChild(moreInfo);
-    
+
             todoBox.appendChild(todoDisplay);
         }
-    }else{
+    } else {
         todoBox.innerHTML = "No Todos Yet";
     }
 };
+// unexpected things happen here!!
+let moreBtn = document.querySelectorAll(".more-btn");
+for (let more of moreBtn) {
+    more.addEventListener('click', (e) => {
+        // document.getElementsByClassName("more-info")[0].style.display = "block";
+        console.log(more);
+    });
+}
 
 const displayGroups = () => {
     let items = JSON.parse(localStorage.getItem("groups"));
@@ -146,7 +173,8 @@ linkList.addEventListener("click", e => {
     currentGroupId = e.target.id;
 })
 
-saveBtn.addEventListener("click", () => {
+saveBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     addTodo(currentGroupId);
     todoForm.reset();
     newToDo.style.display = 'none';
