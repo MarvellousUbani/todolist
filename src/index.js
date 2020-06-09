@@ -144,10 +144,10 @@ const displayTodos = (projectId) => {
 todoBox.addEventListener("click", (e) => {
     if (e.target.textContent === "More...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "block";
-        e.target.textContent = "Less..."
-    } else {
+        document.getElementsByClassName("more-btn")[0].textContent = "Less..."
+    } else if (e.target.textContent === "Less...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "none";
-        e.target.textContent = "More..."
+        document.getElementsByClassName("more-btn")[0].textContent = "More..."
     }
 })
 
