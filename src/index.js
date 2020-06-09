@@ -142,7 +142,9 @@ const displayTodos = (projectId) => {
 // }
 
 todoBox.addEventListener("click", (e) => {
-    e.target.parentNode.parentNode.childNodes[1].style.display = "block";
+    if(e.target.textContent === "More..."){
+        e.target.parentNode.parentNode.childNodes[1].style.display = "block";
+    }
 })
 
 const displayGroups = () => {
