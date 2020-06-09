@@ -102,7 +102,7 @@ const displayTodos = (projectId) => {
             const moreInfo = document.createElement("div");
             moreInfo.classList.add("more-info");
 
-            
+
             infoTitle.textContent = `${title}`;
             const infoDescription = document.createElement("p");
             infoDescription.textContent = `${description}`;
@@ -142,8 +142,12 @@ const displayTodos = (projectId) => {
 // }
 
 todoBox.addEventListener("click", (e) => {
-    if(e.target.textContent === "More..."){
+    if (e.target.textContent === "More...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "block";
+        e.target.textContent = "Less..."
+    } else {
+        e.target.parentNode.parentNode.childNodes[1].style.display = "none";
+        e.target.textContent = "More..."
     }
 })
 
