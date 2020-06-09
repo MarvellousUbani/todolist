@@ -12,6 +12,7 @@ const saveBtn = document.querySelector(".save-btn");
 const cancelBtn = document.querySelectorAll(".cancel-btn");
 const todoForm = document.getElementById("todo-form");
 const newToDo = document.getElementsByClassName('new-todo')[0];
+const todoBox = document.getElementById("todo-box");
 
 addNewList.addEventListener('click', e => {
     document.getElementsByClassName('new-list')[0].style.display = "block";
@@ -68,7 +69,6 @@ const addTodo = (projectId) => {
     localStorage.setItem("groups", JSON.stringify(groups));
 }
 
-const todoBox = document.getElementById("todo-box");
 const displayTodos = (projectId) => {
     todoBox.innerHTML = "";
     groups = JSON.parse(localStorage.getItem("groups")) || {};
@@ -86,13 +86,15 @@ const displayTodos = (projectId) => {
             checkbox.setAttribute("type", "checkbox");
             const todoTitle = document.createElement("span");
             todoTitle.classList.add("todoTitle");
+            todoTitle.textContent = `${title}`;
+
             const moreButton = document.createElement("button");
             moreButton.classList.add("more-btn");
-            const infoTitle = document.createElement("p");
-            todoTitle.textContent = `${title}`;
-            inputHolder.appendChild(infoTitle);
             moreButton.textContent = "More...";
 
+            const infoTitle = document.createElement("p");
+
+            inputHolder.appendChild(infoTitle);
             inputHolder.appendChild(checkbox);
             inputHolder.appendChild(todoTitle);
             inputHolder.appendChild(moreButton);
@@ -100,6 +102,7 @@ const displayTodos = (projectId) => {
             const moreInfo = document.createElement("div");
             moreInfo.classList.add("more-info");
 
+            
             infoTitle.textContent = `${title}`;
             const infoDescription = document.createElement("p");
             infoDescription.textContent = `${description}`;
@@ -130,13 +133,17 @@ const displayTodos = (projectId) => {
     }
 };
 // unexpected things happen here!!
-let moreBtn = document.querySelectorAll(".more-btn");
-for (let more of moreBtn) {
-    more.addEventListener('click', (e) => {
-        // document.getElementsByClassName("more-info")[0].style.display = "block";
-        console.log(more);
-    });
-}
+// let moreBtn = document.querySelectorAll(".more-btn");
+// for (let more of moreBtn) {
+//     more.addEventListener('click', (e) => {
+//         // document.getElementsByClassName("more-info")[0].style.display = "block";
+//         console.log(more);
+//     });
+// }
+
+todoBox.addEventListener("click", (e) => {
+    e.target.parentNode.parentNode.childNodes[1].style.display = "block";
+})
 
 const displayGroups = () => {
     let items = JSON.parse(localStorage.getItem("groups"));
