@@ -65,9 +65,27 @@ const addTodo = (projectId) => {
     const dueDate = document.getElementById("dateDue").value;
     const priority = document.getElementById("priority").value;
     const description = document.getElementById("description").value;
-    groups[projectId].todos[id] = { title, description, dueDate, priority };
+    groups[projectId].todos[id] = { id, title, description, dueDate, priority };
     localStorage.setItem("groups", JSON.stringify(groups));
 }
+
+// groups = JSON.parse(localStorage.getItem("groups")) || {};
+// console.log(groups[50].todos[51]);
+
+const editTodo = (groupId, todoId) => {
+    // Popup the todo form, set projectId to current, set todoId to the one that was clicked
+    // Saving should groups -> projectid.todos-> id -> overwrite
+    todoForm.style.display = "block";
+    groups = JSON.parse(localStorage.getItem("groups")) || {};
+    const { title, dueDate, priority, description } = groups[groupId].todos[todoId];
+    document.getElementById("title").value = `${title}`;
+    document.getElementById("dateDue").value = `${dueDate}`;
+    document.getElementById("priority").value = `${priority}`;
+    document.getElementById("description").value = `${description}`
+    console.log("Working...?")
+}
+
+editTodo(50, 51);
 
 const displayTodos = (projectId) => {
     todoBox.innerHTML = "";
@@ -75,7 +93,7 @@ const displayTodos = (projectId) => {
     const todos = groups[projectId].todos;
     if (Object.values(todos).length > 0) {
         for (let todo in todos) {
-            const { title, description, priority, dueDate } = todos[todo];
+            const { id, title, description, priority, dueDate } = todos[todo];
 
             const todoDisplay = document.createElement("div");
             todoDisplay.classList.add("todo-display");
@@ -101,6 +119,7 @@ const displayTodos = (projectId) => {
 
             const moreInfo = document.createElement("div");
             moreInfo.classList.add("more-info");
+            moreInfo.setAttribute("id", `${id}`);
 
 
             infoTitle.textContent = `${title}`;
@@ -140,6 +159,8 @@ const displayTodos = (projectId) => {
 //         console.log(more);
 //     });
 // }
+
+
 
 todoBox.addEventListener("click", (e) => {
     if (e.target.textContent === "More...") {
