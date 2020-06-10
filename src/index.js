@@ -168,14 +168,14 @@ const displayTodos = (projectId) => {
 todoBox.addEventListener("click", (e) => {
     if (e.target.textContent === "More...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "block";
-        document.getElementsByClassName("more-btn")[0].textContent = "Less..."
+        e.target.textContent = "Less..."
     } else if (e.target.textContent === "Less...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "none";
-        document.getElementsByClassName("more-btn")[0].textContent = "More..."
+        e.target.textContent = "More..."
     }
 
-    if(e.target.textContent === "Edit"){
-        newToDo.style.display = 'block';  
+    if (e.target.textContent === "Edit") {
+        newToDo.style.display = 'block';
         currentTodoId = e.target.parentNode.id
         editTodo(currentGroupId, currentTodoId)
     }
