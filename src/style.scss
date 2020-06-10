@@ -61,9 +61,7 @@ $input-padding: 10px;
     .middle-side {
         position: relative;
         // background: #000;
-        .todo-checked {
-            background: #aad576;
-        }
+        
         .todo-display {
             // border: 1px solid #000;
             border-radius: 5px;
@@ -98,6 +96,9 @@ $input-padding: 10px;
                 height: 15px;
                 width: 15px;
             }
+        }
+        .todo-checked {
+            background: #aad576 ;
         }
         .more-info {
             display: none;

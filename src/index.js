@@ -23,18 +23,13 @@ addNewTodo.addEventListener('click', e => {
     newToDo.style.display = 'block';
 })
 
-// cancelBtn.addEventListener('click', (e) => {
-//     document.getElementsByClassName('new-list')[0].style.display = "none";
-//     newToDo.style.display = 'none';
-//     // console.log(e.target.class)
-// });
+
 for (let btn of cancelBtn) {
     btn.addEventListener('click', () => {
         document.getElementsByClassName('new-list')[0].style.display = "none";
         newToDo.style.display = 'none';
     })
 }
-
 
 
 
@@ -73,23 +68,13 @@ const addTodo = (projectId, todoId) => {
 }
 
 function updateTodoStatus(groupId, todoId) {
-    var checkbox = document.getElementsByClassName("todo-checked");
-    // localStorage.setItem(JSON.parse(groups[projectId].todos[id]), checkbox.checked);
-    groups[groupId].todos[todoId][completed] = true;
+    groups[groupId].todos[todoId].completed = !groups[groupId].todos[todoId].completed
     localStorage.setItem("groups", JSON.stringify(groups));
-    // "groups", JSON.stringify(groups)
 }
 
 
 
-
-
-// groups = JSON.parse(localStorage.getItem("groups")) || {};
-// console.log(groups[50].todos[51]);
-
 const editTodo = (groupId, todoId) => {
-    // Popup the todo form, set projectId to current, set todoId to the one that was clicked
-    // Saving should groups -> projectid.todos-> id -> overwrite
     groups = JSON.parse(localStorage.getItem("groups")) || {};
     const { title, dueDate, priority, description } = groups[groupId].todos[todoId];
     document.getElementById("title").value = `${title}`;
@@ -99,9 +84,7 @@ const editTodo = (groupId, todoId) => {
     console.log("Working...?")
 }
 
-// const deleteTodo = (todoId) => {
-//     localStorage.removeItem(todoId);
-// }
+
 const deleteTodo = (groupId, todoId) => {
     groups = JSON.parse(localStorage.getItem("groups")) || {};
     delete groups[groupId].todos[todoId];
@@ -116,17 +99,17 @@ const displayTodos = (projectId) => {
     const todos = groups[projectId].todos;
     if (Object.values(todos).length > 0) {
         for (let todo in todos) {
-            const { id, title, description, priority, dueDate } = todos[todo];
+            const { id, title, description, priority, dueDate, completed } = todos[todo];
 
             const todoDisplay = document.createElement("div");
             todoDisplay.classList.add("todo-display");
-            // todoDisplay.classList.add("todo-checked");
 
             const inputHolder = document.createElement("div");
             inputHolder.classList.add("test");
             const checkbox = document.createElement("input");
             checkbox.setAttribute("type", "checkbox");
             checkbox.setAttribute("class", "todo-checkbox");
+
             const todoTitle = document.createElement("span");
             todoTitle.classList.add("todoTitle");
             todoTitle.textContent = `${title}`;
@@ -167,6 +150,9 @@ const displayTodos = (projectId) => {
             moreInfo.appendChild(priorityLevel);
             moreInfo.appendChild(editButton);
             moreInfo.appendChild(deleteButton);
+            
+            completed === true ? todoDisplay.classList.add("todo-checked") : todoDisplay.classList.remove("todo-checked")
+            console.log(completed);
             todoDisplay.appendChild(inputHolder);
             todoDisplay.appendChild(moreInfo);
             todoBox.appendChild(todoDisplay);
@@ -197,8 +183,9 @@ todoBox.addEventListener("click", (e) => {
         displayTodos(currentGroupId);
     }
     if (e.target.type === "checkbox") {
-        docum
-    }
+        updateTodoStatus(currentGroupId, e.target.parentNode.parentNode.childNodes[1].id);
+        displayTodos(currentGroupId);
+      }
 
 })
 
