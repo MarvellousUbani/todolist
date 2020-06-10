@@ -8,6 +8,7 @@ let listGroup = document.getElementById("listName");
 let linkList = document.getElementById("link-list");
 let btns = [addNewList, addNewTodo];
 let currentGroupId = "";
+let currentTodoId = null;
 const saveBtn = document.querySelector(".save-btn");
 const cancelBtn = document.querySelectorAll(".cancel-btn");
 const todoForm = document.getElementById("todo-form");
@@ -61,8 +62,8 @@ const group = (title, description, todos = {}) => {
     }
 }
 
-const addTodo = (projectId) => {
-    const id = generateId();
+const addTodo = (projectId, todoId) => {
+    const id = todoId || generateId();
     const title = document.getElementById("title").value;
     const dueDate = document.getElementById("dateDue").value;
     const priority = document.getElementById("priority").value;
@@ -174,8 +175,9 @@ todoBox.addEventListener("click", (e) => {
     }
 
     if(e.target.textContent === "Edit"){
-        newToDo.style.display = 'block';
-        editTodo(currentGroupId, e.target.parentNode.id)
+        newToDo.style.display = 'block';  
+        currentTodoId = e.target.parentNode.id
+        editTodo(currentGroupId, currentTodoId)
     }
 })
 
@@ -216,7 +218,7 @@ linkList.addEventListener("click", e => {
 
 saveBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    addTodo(currentGroupId);
+    addTodo(currentGroupId, currentTodoId);
     todoForm.reset();
     newToDo.style.display = 'none';
     displayTodos(currentGroupId);
