@@ -36,8 +36,33 @@ for (let btn of cancelBtn) {
 // Creating Groups and Group Logic
 
 let groups = {
+    1: {
+        id: 1,
+        title: "My Default List",
+        description: "Random task to complete",
+        todos: {
+            12: {
+                id: 12,
+                title: "swim",
+                description: "Buy Swimsuit",
+                dueDate: new Date(),
+                priority: "High",
+                completed: false
+            },
+            13: {
+                id: 13,
+                title: "run",
+                description: "Buy Swimsuit",
+                dueDate: new Date(),
+                priority: "High",
+                completed: true
+            },
+        }
+    }
 
 }
+
+
 
 const generateId = () => {
     const generatedNumber = Math.floor(Math.random() * 100);
@@ -152,7 +177,6 @@ const displayTodos = (projectId) => {
             moreInfo.appendChild(deleteButton);
 
             completed === true ? todoDisplay.classList.add("todo-checked") : todoDisplay.classList.remove("todo-checked")
-            console.log(completed);
             todoDisplay.appendChild(inputHolder);
             todoDisplay.appendChild(moreInfo);
             todoBox.appendChild(todoDisplay);
@@ -217,7 +241,7 @@ function addToTheDom(e) {
     newListForm.reset();
 }
 
-displayGroups();
+// displayGroups();
 
 linkList.addEventListener("click", e => {
     displayTodos(e.target.id);
@@ -231,3 +255,15 @@ saveBtn.addEventListener("click", (e) => {
     newToDo.style.display = 'none';
     displayTodos(currentGroupId);
 });
+
+function initializeGroup() {
+    if (localStorage.getItem("groups") == null) {
+        localStorage.setItem("groups", JSON.stringify(groups));
+    }
+    currentGroupId = 1;
+    groups = JSON.parse(localStorage.getItem("groups"))
+    displayGroups();
+
+    displayTodos(currentGroupId);
+}
+initializeGroup();
