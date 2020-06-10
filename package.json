@@ -19,6 +19,7 @@
     "homepage": "https://github.com/MarvellousUbani/todolist#readme",
     "devDependencies": {
         "css-loader": "^3.5.3",
+        "file-loader": "^6.0.0",
         "sass": "^1.26.8",
         "sass-loader": "^8.0.2",
         "style-loader": "^1.2.1",

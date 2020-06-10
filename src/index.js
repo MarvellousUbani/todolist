@@ -1,5 +1,5 @@
 import './style.scss';
-
+import image from './img/backgroung.jpg';
 // DOM manipulation
 let addNewList = document.getElementById("addNewList");
 let addNewTodo = document.getElementById("addNewTodo");
@@ -150,7 +150,7 @@ const displayTodos = (projectId) => {
             moreInfo.appendChild(priorityLevel);
             moreInfo.appendChild(editButton);
             moreInfo.appendChild(deleteButton);
-            
+
             completed === true ? todoDisplay.classList.add("todo-checked") : todoDisplay.classList.remove("todo-checked")
             console.log(completed);
             todoDisplay.appendChild(inputHolder);
@@ -158,7 +158,7 @@ const displayTodos = (projectId) => {
             todoBox.appendChild(todoDisplay);
         }
     } else {
-        todoBox.innerHTML = "No Todos Yet";
+        todoBox.innerHTML = '<p class="no-todo">No Todos Yet</p>';
     }
 };
 
@@ -185,7 +185,7 @@ todoBox.addEventListener("click", (e) => {
     if (e.target.type === "checkbox") {
         updateTodoStatus(currentGroupId, e.target.parentNode.parentNode.childNodes[1].id);
         displayTodos(currentGroupId);
-      }
+    }
 
 })
 
