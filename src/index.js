@@ -68,9 +68,21 @@ const addTodo = (projectId, todoId) => {
     const dueDate = document.getElementById("dateDue").value;
     const priority = document.getElementById("priority").value;
     const description = document.getElementById("description").value;
-    groups[projectId].todos[id] = { id, title, description, dueDate, priority };
+    groups[projectId].todos[id] = { id, title, description, dueDate, priority, completed: false };
     localStorage.setItem("groups", JSON.stringify(groups));
 }
+
+function updateTodoStatus(groupId, todoId) {
+    var checkbox = document.getElementsByClassName("todo-checked");
+    // localStorage.setItem(JSON.parse(groups[projectId].todos[id]), checkbox.checked);
+    groups[groupId].todos[todoId][completed] = true;
+    localStorage.setItem("groups", JSON.stringify(groups));
+    // "groups", JSON.stringify(groups)
+}
+
+
+
+
 
 // groups = JSON.parse(localStorage.getItem("groups")) || {};
 // console.log(groups[50].todos[51]);
@@ -108,11 +120,13 @@ const displayTodos = (projectId) => {
 
             const todoDisplay = document.createElement("div");
             todoDisplay.classList.add("todo-display");
+            // todoDisplay.classList.add("todo-checked");
 
             const inputHolder = document.createElement("div");
             inputHolder.classList.add("test");
             const checkbox = document.createElement("input");
             checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("class", "todo-checkbox");
             const todoTitle = document.createElement("span");
             todoTitle.classList.add("todoTitle");
             todoTitle.textContent = `${title}`;
@@ -153,10 +167,8 @@ const displayTodos = (projectId) => {
             moreInfo.appendChild(priorityLevel);
             moreInfo.appendChild(editButton);
             moreInfo.appendChild(deleteButton);
-
             todoDisplay.appendChild(inputHolder);
             todoDisplay.appendChild(moreInfo);
-
             todoBox.appendChild(todoDisplay);
         }
     } else {
@@ -183,6 +195,9 @@ todoBox.addEventListener("click", (e) => {
         currentTodoId = e.target.parentNode.id;
         deleteTodo(currentGroupId, currentTodoId);
         displayTodos(currentGroupId);
+    }
+    if (e.target.type === "checkbox") {
+        docum
     }
 
 })
