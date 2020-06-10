@@ -35,6 +35,8 @@ for (let btn of cancelBtn) {
 }
 
 
+
+
 // Creating Groups and Group Logic
 
 let groups = {
@@ -75,7 +77,6 @@ const addTodo = (projectId) => {
 const editTodo = (groupId, todoId) => {
     // Popup the todo form, set projectId to current, set todoId to the one that was clicked
     // Saving should groups -> projectid.todos-> id -> overwrite
-    todoForm.style.display = "block";
     groups = JSON.parse(localStorage.getItem("groups")) || {};
     const { title, dueDate, priority, description } = groups[groupId].todos[todoId];
     document.getElementById("title").value = `${title}`;
@@ -85,7 +86,6 @@ const editTodo = (groupId, todoId) => {
     console.log("Working...?")
 }
 
-editTodo(50, 51);
 
 const displayTodos = (projectId) => {
     todoBox.innerHTML = "";
@@ -132,6 +132,7 @@ const displayTodos = (projectId) => {
 
             const editButton = document.createElement("button");
             editButton.textContent = "Edit";
+            editButton.classList.add("updateButton");
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
 
@@ -162,6 +163,7 @@ const displayTodos = (projectId) => {
 
 
 
+
 todoBox.addEventListener("click", (e) => {
     if (e.target.textContent === "More...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "block";
@@ -169,6 +171,11 @@ todoBox.addEventListener("click", (e) => {
     } else if (e.target.textContent === "Less...") {
         e.target.parentNode.parentNode.childNodes[1].style.display = "none";
         document.getElementsByClassName("more-btn")[0].textContent = "More..."
+    }
+
+    if(e.target.textContent === "Edit"){
+        newToDo.style.display = 'block';
+        editTodo(currentGroupId, e.target.parentNode.id)
     }
 })
 
