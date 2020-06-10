@@ -87,6 +87,16 @@ const editTodo = (groupId, todoId) => {
     console.log("Working...?")
 }
 
+// const deleteTodo = (todoId) => {
+//     localStorage.removeItem(todoId);
+// }
+const deleteTodo = (groupId, todoId) => {
+    groups = JSON.parse(localStorage.getItem("groups")) || {};
+    delete groups[groupId].todos[todoId];
+    localStorage.setItem("groups", JSON.stringify(groups));
+}
+
+
 
 const displayTodos = (projectId) => {
     todoBox.innerHTML = "";
@@ -153,16 +163,6 @@ const displayTodos = (projectId) => {
         todoBox.innerHTML = "No Todos Yet";
     }
 };
-// unexpected things happen here!!
-// let moreBtn = document.querySelectorAll(".more-btn");
-// for (let more of moreBtn) {
-//     more.addEventListener('click', (e) => {
-//         // document.getElementsByClassName("more-info")[0].style.display = "block";
-//         console.log(more);
-//     });
-// }
-
-
 
 
 todoBox.addEventListener("click", (e) => {
@@ -179,6 +179,12 @@ todoBox.addEventListener("click", (e) => {
         currentTodoId = e.target.parentNode.id
         editTodo(currentGroupId, currentTodoId)
     }
+    if (e.target.textContent === "Delete") {
+        currentTodoId = e.target.parentNode.id;
+        deleteTodo(currentGroupId, currentTodoId);
+        displayTodos(currentGroupId);
+    }
+
 })
 
 const displayGroups = () => {
