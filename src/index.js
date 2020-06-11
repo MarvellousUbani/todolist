@@ -1,19 +1,21 @@
 import './style.scss';
 import image from './img/backgroung.jpg';
 // DOM manipulation
-let addNewList = document.getElementById("addNewList");
-let addNewTodo = document.getElementById("addNewTodo");
-let newListSaveBtn = document.getElementById("newListSaveBtn");
-let listGroup = document.getElementById("listName");
-let linkList = document.getElementById("link-list");
-let btns = [addNewList, addNewTodo];
+import {
+    addNewList,
+    addNewTodo,
+    newListSaveBtn,
+    listGroup,
+    linkList,
+    btns,
+    currentTodoId,
+    saveBtn,
+    cancelBtn,
+    todoForm,
+    newToDo,
+    todoBox
+} from './domManipulation'
 let currentGroupId = "";
-let currentTodoId = null;
-const saveBtn = document.querySelector(".save-btn");
-const cancelBtn = document.querySelectorAll(".cancel-btn");
-const todoForm = document.getElementById("todo-form");
-const newToDo = document.getElementsByClassName('new-todo')[0];
-const todoBox = document.getElementById("todo-box");
 
 addNewList.addEventListener('click', e => {
     document.getElementsByClassName('new-list')[0].style.display = "block";
@@ -241,7 +243,6 @@ function addToTheDom(e) {
     newListForm.reset();
 }
 
-// displayGroups();
 
 linkList.addEventListener("click", e => {
     displayTodos(e.target.id);
