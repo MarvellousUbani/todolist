@@ -4,7 +4,6 @@ let newListSaveBtn = document.getElementById("newListSaveBtn");
 let listGroup = document.getElementById("listName");
 let linkList = document.getElementById("link-list");
 let btns = [addNewList, addNewTodo];
-let currentTodoId = null;
 const saveBtn = document.querySelector(".save-btn");
 const cancelBtn = document.querySelectorAll(".cancel-btn");
 const todoForm = document.getElementById("todo-form");
@@ -18,7 +17,6 @@ export {
     listGroup,
     linkList,
     btns,
-    currentTodoId,
     saveBtn,
     cancelBtn,
     todoForm,

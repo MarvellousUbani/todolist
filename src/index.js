@@ -8,14 +8,15 @@ import {
     listGroup,
     linkList,
     btns,
-    currentTodoId,
     saveBtn,
     cancelBtn,
     todoForm,
     newToDo,
     todoBox
 } from './domManipulation'
+
 let currentGroupId = "";
+let currentTodoId = null;
 
 addNewList.addEventListener('click', e => {
     document.getElementsByClassName('new-list')[0].style.display = "block";
@@ -107,8 +108,7 @@ const editTodo = (groupId, todoId) => {
     document.getElementById("title").value = `${title}`;
     document.getElementById("dateDue").value = `${dueDate}`;
     document.getElementById("priority").value = `${priority}`;
-    document.getElementById("description").value = `${description}`
-    console.log("Working...?")
+    document.getElementById("description").value = `${description}`;
 }
 
 
@@ -123,8 +123,8 @@ const deleteTodo = (groupId, todoId) => {
 const displayTodos = (projectId) => {
     todoBox.innerHTML = "";
     groups = JSON.parse(localStorage.getItem("groups")) || {};
-    const todos = groups[projectId].todos;
-    if (Object.values(todos).length > 0) {
+    if (Object.values(groups[projectId].todos).length > 0) {
+        const todos = groups[projectId].todos;
         for (let todo in todos) {
             const { id, title, description, priority, dueDate, completed } = todos[todo];
 
@@ -250,11 +250,13 @@ linkList.addEventListener("click", e => {
 })
 
 saveBtn.addEventListener("click", (e) => {
+  if(document.getElementById("title").value != ""){
     e.preventDefault();
     addTodo(currentGroupId, currentTodoId);
     todoForm.reset();
     newToDo.style.display = 'none';
     displayTodos(currentGroupId);
+  }   
 });
 
 function initializeGroup() {
@@ -262,9 +264,9 @@ function initializeGroup() {
         localStorage.setItem("groups", JSON.stringify(groups));
     }
     currentGroupId = 1;
-    groups = JSON.parse(localStorage.getItem("groups"))
+    groups = JSON.parse(localStorage.getItem("groups"));
     displayGroups();
-
     displayTodos(currentGroupId);
 }
+
 initializeGroup();
